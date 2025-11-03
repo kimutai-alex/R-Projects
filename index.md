@@ -31,3 +31,17 @@ Dataset: [NYC Airbnb Listings 2019](http://insideairbnb.com/)
 > *Public dataset hosted by Inside Airbnb — featuring over 48,000 listings, including host IDs, neighborhoods, room types, and nightly prices.*
 
 File used:  
+data/AB_NYC_2019.csv
+---
+
+## 📂 Step 1: Load the Data
+
+```r
+suppressPackageStartupMessages(library(tidyverse))
+
+# Read the dataset
+listings <- read_csv('data/AB_NYC_2019.csv', show_col_types = FALSE)
+
+# Quick check
+nrow(listings)
+head(listings, n = 10)
