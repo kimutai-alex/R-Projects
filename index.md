@@ -1,6 +1,6 @@
 # 📊 Data Exploration with R: Airbnb Listings in New York City (2019)
 
-> **Powered by [DataCamp](https://www.datacamp.com/)**  
+> **Climate Data](https://kimutai-alex.github.io/R-Projects/climate-data/)**  
 > Category: `Business Analytics` · `Data Exploration` · `Security-Conscious Data Handling`
 
 ---
