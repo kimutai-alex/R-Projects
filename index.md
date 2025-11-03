@@ -24,7 +24,7 @@ The goal is to demonstrate **data exploration, wrangling, and visualization** sk
   - `ggplot2` (for creating visuals)
 
 ---
-
+<img width="557" height="525" alt="Top 10 NYC Neighbourhoods with AirBnB Listings" src="https://github.com/user-attachments/assets/7176cc2d-f226-462f-8067-a199b2bad257" />
 ## 📥 Data Source
 
 Dataset: [NYC Airbnb Listings 2019](http://insideairbnb.com/)  
@@ -46,5 +46,5 @@ listings <- read_csv('data/AB_NYC_2019.csv', show_col_types = FALSE)
 nrow(listings)
 head(listings, n = 10)
 
-<img width="557" height="525" alt="Top 10 NYC Neighbourhoods with AirBnB Listings" src="https://github.com/user-attachments/assets/7176cc2d-f226-462f-8067-a199b2bad257" />
+
 
