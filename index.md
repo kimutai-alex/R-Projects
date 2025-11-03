@@ -45,4 +45,6 @@ listings <- read_csv('data/AB_NYC_2019.csv', show_col_types = FALSE)
 # Quick check
 nrow(listings)
 head(listings, n = 10)
-<img width="540" height="505" alt="image" src="https://github.com/user-attachments/assets/2893cc44-344c-429d-9a8c-b7b4418e110d" />
+
+<img width="557" height="525" alt="Top 10 NYC Neighbourhoods with AirBnB Listings" src="https://github.com/user-attachments/assets/7176cc2d-f226-462f-8067-a199b2bad257" />
+
