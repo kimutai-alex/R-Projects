@@ -1,54 +1,88 @@
-# 📊 Data Exploration with R: Airbnb Listings in New York City (2019)
+---
+title: "Kimutai Alex | Analytics Portfolio"
+description: "Landing page for projects: Climate, E‑commerce, Housing"
+---
 
+# 🚀 Analytics Portfolio
+Welcome! Explore three end‑to‑end data projects demonstrating **EDA, modeling, inference, and visualization** in R (plus a bit of reproducible workflow).
 
-> **[Climate Data](https://kimutai-alex.github.io/R-Projects/climate-data/)**
-> **[E-Commerce Data](https://kimutai-alex.github.io/R-Projects/ecommerce-data/)**  
-> Category: `Business Analytics` · `Data Exploration` · `Security-Conscious Data Handling`
+> Tip: Each project page includes a short narrative, visuals, and links to downloadable tables/figures.
 
 ---
 
-## 🧭 Project Overview
+## 📂 Projects
 
-Since 2008, Airbnb has transformed how travelers experience cities worldwide.  
-This project explores **Airbnb listing activity and pricing data for New York City (2019)** using R’s **tidyverse** ecosystem.  
-The goal is to demonstrate **data exploration, wrangling, and visualization** skills while uncovering insights about NYC’s most active neighborhoods and price distributions.
+### 1) [Climate Data](/climate-data/)
+Understand environmental signals and trade‑offs:
+- Indexed change story (baseline = 100)
+- CO₂ ↔️ Temperature connected paths (per country, over time)
+- Sea‑level trends, ridgelines, eco‑tradeoff map
+- Global renewable momentum (static + animated)
+
+**Tech:** R · tidyverse · ggplot2 · ggridges · ggrepel · sf · rnaturalearth · gganimate
+
+---
+
+### 2) [E‑commerce Data](/ecommerce-data/)
+Customer, product, and revenue analytics:
+- Cohort retention & RFM segmentation
+- A/B uplift views for experiments
+- Basket affinity (market basket) and price‑mix visuals
+
+**Tech:** R · dplyr · ggplot2 · arules · broom
+
+> *(Placeholder page)* — add your dataset, visuals, and write‑ups here.
 
 ---
 
-## 🧰 Tools and Libraries
+### 3) [Housing](/housing/)
+Market structure & valuation signals:
+- Hedonic regression (price drivers)
+- Spatial trends and neighborhood profiling
+- Time‑on‑market & affordability dashboards
 
-- **Language:** R  
-- **Key Packages:**  
-  - `tidyverse` (for data manipulation and visualization)  
-  - `readr` (for CSV import)  
-  - `dplyr` (for summarization and grouping)  
-  - `forcats` (for categorical reordering)  
-  - `ggplot2` (for creating visuals)
+**Tech:** R · tidymodels · sf · ggplot2 · yardstick
+
+> *(Placeholder page)* — add your dataset, visuals, and write‑ups here.
 
 ---
-<img width="557" height="525" alt="Top 10 NYC Neighbourhoods with AirBnB Listings" src="https://github.com/user-attachments/assets/7176cc2d-f226-462f-8067-a199b2bad257" />
 
+## 🖼️ Featured Visuals (from Climate)
+- ![Sea Level Rise Over Time](figs/01_sea_level_trend.png)
+- ![CO₂–Temperature Paths (faceted)](figs/M1b_co2_temp_connected_paths_faceted_free.png)
+- ![Indexed Change Story](figs/M2_index_story.png)
+- ![Temperature Ridgeline](figs/M3_temp_ridgeline.png)
+- ![Eco‑Tradeoff Map](figs/M4_eco_tradeoff_map.png)
+- ![Renewables Δ World](figs/M5_world_renewables_delta.png)
+- ![Renewables Animation](figs/world_renewables_yearly.gif)
+- ![Decoupling Vectors](figs/M7_decoupling_vectors.png)
 
-## 📥 Data Source
-
-Dataset: [NYC Airbnb Listings 2019](http://insideairbnb.com/)  
-> *Public dataset hosted by Inside Airbnb — featuring over 48,000 listings, including host IDs, neighborhoods, room types, and nightly prices.*
-
-File used:  
-data/AB_NYC_2019.csv
 ---
 
-## 📂 Step 1: Load the Data
+## 🧱 How this portfolio is built
+- **Reproducible R**: `renv`, tidy scripts, saved outputs in `/figs` & `/tables`.
+- **Site**: GitHub Pages + Markdown.
 
-```r
-suppressPackageStartupMessages(library(tidyverse))
+**Suggested structure**
+```
+.
+├─ index.md                      # ← this landing page
+├─ climate-data/                 # ← project subpage
+│  └─ index.md
+├─ ecommerce-data/
+│  └─ index.md
+├─ housing/
+│  └─ index.md
+├─ figs/                         # exported images
+├─ tables/                       # CSV outputs
+└─ _config.yml                   # optional theme
+```
 
-# Read the dataset
-listings <- read_csv('data/AB_NYC_2019.csv', show_col_types = FALSE)
+---
 
-# Quick check
-nrow(listings)
-head(listings, n = 10)
+## ✉️ Contact
+- Email: kimutaialex2@gmail.com
+- LinkedIn · GitHub 
 
-
+> *Everything here is evolving—check back for new analyses and dashboards.*
 
