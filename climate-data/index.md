@@ -157,7 +157,7 @@ ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6,
 **What it shows:** Choropleth of change in renewable share; bubbles show average extreme events.
 
 ### 7) Animated — Renewables by Year (GIF)
-![Renewables animation](figs/world_renewables_yearly.gif)
+![Renewables animation](/R-projects/figs/world_renewables_yearly.gif)
 **What it shows:** Year‑by‑year evolution of renewable energy share.
 
 ### 8) Decoupling Vectors — Renewables vs Total CO₂
