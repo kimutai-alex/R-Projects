@@ -23,7 +23,7 @@ Understand environmental signals and trade‑offs:
 
 ---
 
-### 2) [E‑commerce Data](/ecommerce-data/)
+### 2) [E‑commerce Data](/R-Projects/ecommerce-data/)
 Customer, product, and revenue analytics:
 - Cohort retention & RFM segmentation
 - A/B uplift views for experiments
@@ -35,7 +35,7 @@ Customer, product, and revenue analytics:
 
 ---
 
-### 3) [Housing](/housing/)
+### 3) [Housing](/R-Projects/housing/)
 Market structure & valuation signals:
 - Hedonic regression (price drivers)
 - Spatial trends and neighborhood profiling
