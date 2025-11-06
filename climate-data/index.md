@@ -133,39 +133,39 @@ ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6,
 > Drop your generated images into `/figs` (and CSVs into `/tables`). Filenames below match the code you’re running.
 
 ### 1) CO₂–Temperature Paths by Country (faceted)
-![CO₂–Temperature Paths (faceted)](figs/M1b_co2_temp_connected_paths_faceted_free.png)
+![CO₂–Temperature Paths (faceted)]({{ '/figs/M1b_co2_temp_connected_paths_faceted_free.png' | relative_url }})
 **What it shows:** Time‑connected paths for each country; direction and shape reveal coupling between CO₂ per‑capita and temperature. Free scales per panel clarify local dynamics.
 
 ### 2) Sea Level Rise Over Time
-![Sea level rise over time](figs/01_sea_level_trend.png)
+![Sea level rise over time]({{ '/figs/01_sea_level_trend.png' | relative_url }})
 **What it shows:** Within‑country sea‑level trajectories; compare slopes across facets.
 
 ### 3) Indexed Change Since Baseline (highlighted country)
-![Indexed change story](figs/M2_index_story.png)
+![Indexed change story]({{ '/figs/M2_index_story.png' | relative_url }})
 **What it shows:** Relative change (baseline = 100) across multiple metrics with peer IQR band and median. Swap `highlight_country` to change the focus.
 
 ### 4) Temperature Distributions by Country (Ridgeline)
-![Temperature ridgeline](figs/M3_temp_ridgeline.png)
+![Temperature ridgeline]({{ '/figs/M3_temp_ridgeline.png' | relative_url }})
 **What it shows:** Distribution shape, spread, and medians (25/50/75%) across countries.
 
 ### 5) Eco‑Tradeoff Map (Rainfall vs Renewables)
-![Eco tradeoff map](figs/M4_eco_tradeoff_map.png)
+![Eco tradeoff map]({{ '/figs/M4_eco_tradeoff_map.png' | relative_url }})
 **What it shows:** Strategic quadrants. Bubble size = forest cover; color = extreme weather intensity; GAM smooth hints at trend.
 
 ### 6) World Map — Renewable Momentum (Δ latest − baseline)
-![Renewables delta world](figs/M5_world_renewables_delta.png)
+![Renewables delta world]({{ '/figs/M5_world_renewables_delta.png' | relative_url }})
 **What it shows:** Choropleth of change in renewable share; bubbles show average extreme events.
 
 ### 7) Animated — Renewables by Year (GIF)
-![Renewables animation](/R-projects/figs/world_renewables_yearly.gif)
+![Renewables animation]({{ '/figs/world_renewables_yearly.gif' | relative_url }})
 **What it shows:** Year‑by‑year evolution of renewable energy share.
 
 ### 8) Decoupling Vectors — Renewables vs Total CO₂
-![Decoupling vectors](figs/M7_decoupling_vectors.png)
+![Decoupling vectors]({{ '/figs/M7_decoupling_vectors.png' | relative_url }})
 **What it shows:** Arrows from first→latest year in (renewables %, total CO₂ Mt). Green class = rising renewables with falling total CO₂ (decoupling).
 
 **Downloads for #8:**
-- [Decoupling summary (CSV)](tables/decoupling_summary.csv)
+- [Decoupling summary (CSV)]({{ '/tables/decoupling_summary.csv' | relative_url }})
 
 ---
 
