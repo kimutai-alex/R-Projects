@@ -12,7 +12,7 @@ Welcome! Explore three end‑to‑end data projects demonstrating **EDA, modelin
 
 ## 📂 Projects
 
-### 1) [Climate Data](/climate-data/)
+### 1) [Climate Data](/R-Projects/climate-data/)
 Understand environmental signals and trade‑offs:
 - Indexed change story (baseline = 100)
 - CO₂ ↔️ Temperature connected paths (per country, over time)
