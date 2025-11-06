@@ -133,7 +133,8 @@ ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6,
 ## 📊 Story Gallery
 
 ### 1) CO₂–Temperature Paths by Country (faceted)
-<img src="{{ IMG_DIR | append: '/M1b_co2_temp_connected_paths_faceted_free.png' | relative_url }}" alt="CO₂–Temperature Paths (faceted)" width="100%">
+<img width="100%" alt="M1b_co2_temp_connected_paths_faceted_free" src="https://github.com/user-attachments/assets/404b495a-56e4-4b91-9feb-03878df538b0" />
+
 
 ### 2) Sea Level Rise Over Time
 <img src="{{ IMG_DIR | append: '/01_sea_level_trend.png' | relative_url }}" alt="Sea level rise over time" width="100%">
