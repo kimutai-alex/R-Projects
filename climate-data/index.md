@@ -1,5 +1,5 @@
 ---
-title: "Kiplagat | R Analytics Portfolio"
+title: "Kimutai Alex | R Analytics Portfolio"
 description: "Data analytics, statistical modeling, and visualization in R"
 ---
 
@@ -128,14 +128,44 @@ ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6,
 
 ---
 
-## 📊 Plot Gallery (exported PNGs)
-Place these files under `/figs` in your repo and they will render here:
+## 📊 Story Gallery (exported visuals)
 
-![Sea level rise](figs/01_sea_level_trend.png)
-![CO₂ vs Temp](figs/02_co2_vs_temp.png)
-![Temp trend](figs/03_temp_trend.png)
-![Rainfall vs Renewables](figs/04_rainfall_vs_renewables.png)
-![Extreme Events](figs/05_extreme_events_by_country_year.png)
+> Drop your generated images into `/figs` (and CSVs into `/tables`). Filenames below match the code you’re running.
+
+### 1) CO₂–Temperature Paths by Country (faceted)
+![CO₂–Temperature Paths (faceted)](figs/M1b_co2_temp_connected_paths_faceted_free.png)
+**What it shows:** Time‑connected paths for each country; direction and shape reveal coupling between CO₂ per‑capita and temperature. Free scales per panel clarify local dynamics.
+
+### 2) Sea Level Rise Over Time
+![Sea level rise over time](figs/01_sea_level_trend.png)
+**What it shows:** Within‑country sea‑level trajectories; compare slopes across facets.
+
+### 3) Indexed Change Since Baseline (highlighted country)
+![Indexed change story](figs/M2_index_story.png)
+**What it shows:** Relative change (baseline = 100) across multiple metrics with peer IQR band and median. Swap `highlight_country` to change the focus.
+
+### 4) Temperature Distributions by Country (Ridgeline)
+![Temperature ridgeline](figs/M3_temp_ridgeline.png)
+**What it shows:** Distribution shape, spread, and medians (25/50/75%) across countries.
+
+### 5) Eco‑Tradeoff Map (Rainfall vs Renewables)
+![Eco tradeoff map](figs/M4_eco_tradeoff_map.png)
+**What it shows:** Strategic quadrants. Bubble size = forest cover; color = extreme weather intensity; GAM smooth hints at trend.
+
+### 6) World Map — Renewable Momentum (Δ latest − baseline)
+![Renewables delta world](figs/M5_world_renewables_delta.png)
+**What it shows:** Choropleth of change in renewable share; bubbles show average extreme events.
+
+### 7) Animated — Renewables by Year (GIF)
+![Renewables animation](figs/world_renewables_yearly.gif)
+**What it shows:** Year‑by‑year evolution of renewable energy share.
+
+### 8) Decoupling Vectors — Renewables vs Total CO₂
+![Decoupling vectors](figs/M7_decoupling_vectors.png)
+**What it shows:** Arrows from first→latest year in (renewables %, total CO₂ Mt). Green class = rising renewables with falling total CO₂ (decoupling).
+
+**Downloads for #8:**
+- [Decoupling summary (CSV)](tables/decoupling_summary.csv)
 
 ---
 
@@ -176,7 +206,7 @@ install.packages("here"); here::here("data","climatedata.xlsx")
 3. *(Optional)* Add `_config.yml` with a theme:
 ```yaml
 theme: minima
-``` 
+```
 4. Commit & push → **Settings ▸ Pages** → Source: `main` (root) → Save.
 5. Visit `https://username.github.io/`.
 
@@ -208,3 +238,4 @@ par(mfrow = c(2,2)); plot(model); par(mfrow = c(1,1))
 - **Contact:** [Email](mailto:your.email@example.com) · [LinkedIn](https://www.linkedin.com/) · [GitHub](https://github.com/)
 
 > *This portfolio is continuously evolving. Feedback & collaboration are welcome.*
+
