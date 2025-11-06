@@ -59,25 +59,6 @@ Market structure & valuation signals:
 
 ---
 
-## 🧱 How this portfolio is built
-- **Reproducible R**: `renv`, tidy scripts, saved outputs in `/figs` & `/tables`.
-- **Site**: GitHub Pages + Markdown.
-
-**Suggested structure**
-```
-.
-├─ index.md                      # ← this landing page
-├─ climate-data/                 # ← project subpage
-│  └─ index.md
-├─ ecommerce-data/
-│  └─ index.md
-├─ housing/
-│  └─ index.md
-├─ figs/                         # exported images
-├─ tables/                       # CSV outputs
-└─ _config.yml                   # optional theme
-```
-
 ---
 
 ## ✉️ Contact
