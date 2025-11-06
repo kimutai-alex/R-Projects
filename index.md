@@ -1,7 +1,8 @@
 # 📊 Data Exploration with R: Airbnb Listings in New York City (2019)
 
 
-> **[Climate Data](https://kimutai-alex.github.io/R-Projects/climate-data/)**  
+> **[Climate Data](https://kimutai-alex.github.io/R-Projects/climate-data/)**
+> **[E-Commerce Data](https://kimutai-alex.github.io/R-Projects/E-Commerce Data/)**  
 > Category: `Business Analytics` · `Data Exploration` · `Security-Conscious Data Handling`
 
 ---
