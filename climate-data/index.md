@@ -3,7 +3,7 @@ title: "Kimutai Alex | R Analytics Portfolio"
 description: "Data analytics, statistical modeling, and visualization in R"
 ---
 
-# 👋 Hi, I’m Kiplagat
+# 👋 Hi, I’m Kimutai Alex
 
 I build **data-driven solutions** that blend rigorous statistics, crisp visualizations, and clean, reproducible R code. This portfolio highlights selected work in **EDA**, **regression**, **ANOVA**, **report automation**, and **dashboard-quality plots**—with an emphasis on tidy, production-ready scripts.
 
