@@ -2,7 +2,7 @@
 
 
 > **[Climate Data](https://kimutai-alex.github.io/R-Projects/climate-data/)**
-> **[E-Commerce Data](https://kimutai-alex.github.io/R-Projects/E-Commerce Data/)**  
+> **[E-Commerce Data](https://kimutai-alex.github.io/R-Projects/ecommerce-data/)**  
 > Category: `Business Analytics` · `Data Exploration` · `Security-Conscious Data Handling`
 
 ---
