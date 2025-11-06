@@ -130,15 +130,16 @@ ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6,
 
 ## 📊 Story Gallery (exported visuals)
 
-> Drop your generated images into `/figs` (and CSVs into `/tables`). Filenames below match the code you’re running.
+> Make sure your images are inside the **figs/** folder that sits next to this `index.md` in your Pages source.  
+> The Liquid filter `| relative_url` makes links work for both user and project sites.
 
 ### 1) CO₂–Temperature Paths by Country (faceted)
 ![CO₂–Temperature Paths (faceted)]({{ '/figs/M1b_co2_temp_connected_paths_faceted_free.png' | relative_url }})
-**What it shows:** Time‑connected paths for each country; direction and shape reveal coupling between CO₂ per‑capita and temperature. Free scales per panel clarify local dynamics.
+**What it shows:** Time-connected paths for each country; direction and shape reveal coupling between CO₂ per-capita and temperature. Free scales per panel clarify local dynamics.
 
 ### 2) Sea Level Rise Over Time
 ![Sea level rise over time]({{ '/figs/01_sea_level_trend.png' | relative_url }})
-**What it shows:** Within‑country sea‑level trajectories; compare slopes across facets.
+**What it shows:** Within-country sea-level trajectories; compare slopes across facets.
 
 ### 3) Indexed Change Since Baseline (highlighted country)
 ![Indexed change story]({{ '/figs/M2_index_story.png' | relative_url }})
@@ -148,24 +149,28 @@ ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6,
 ![Temperature ridgeline]({{ '/figs/M3_temp_ridgeline.png' | relative_url }})
 **What it shows:** Distribution shape, spread, and medians (25/50/75%) across countries.
 
-### 5) Eco‑Tradeoff Map (Rainfall vs Renewables)
+### 5) Eco-Tradeoff Map (Rainfall vs Renewables)
 ![Eco tradeoff map]({{ '/figs/M4_eco_tradeoff_map.png' | relative_url }})
 **What it shows:** Strategic quadrants. Bubble size = forest cover; color = extreme weather intensity; GAM smooth hints at trend.
 
 ### 6) World Map — Renewable Momentum (Δ latest − baseline)
 ![Renewables delta world]({{ '/figs/M5_world_renewables_delta.png' | relative_url }})
-**What it shows:** Choropleth of change in renewable share; bubbles show average extreme events.
 
 ### 7) Animated — Renewables by Year (GIF)
 ![Renewables animation]({{ '/figs/world_renewables_yearly.gif' | relative_url }})
-**What it shows:** Year‑by‑year evolution of renewable energy share.
 
 ### 8) Decoupling Vectors — Renewables vs Total CO₂
 ![Decoupling vectors]({{ '/figs/M7_decoupling_vectors.png' | relative_url }})
-**What it shows:** Arrows from first→latest year in (renewables %, total CO₂ Mt). Green class = rising renewables with falling total CO₂ (decoupling).
 
-**Downloads for #8:**
-- [Decoupling summary (CSV)]({{ '/tables/decoupling_summary.csv' | relative_url }})
+**Downloads for #8:**  
+[Decoupling summary (CSV)]({{ '/tables/decoupling_summary.csv' | relative_url }})
+
+---
+
+#### If images still don’t display
+- Ensure `figs/` (and `tables/` for CSV) are **inside the same published source** as `index.md` (root or `/docs`).
+- File names must **exactly** match (case-sensitive).
+- Confirm files are **committed and pushed**, and Pages build is successful in **Settings → Pages**.
 
 ---
 
