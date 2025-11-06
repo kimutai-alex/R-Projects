@@ -128,42 +128,33 @@ ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6,
 
 ---
 
-## 📊 Story Gallery (exported visuals)
+{% assign IMG_DIR = '/climate-data/figs' %}  <!-- ← change /climate-data to your real folder -->
 
-> Make sure your images are inside the **figs/** folder that sits next to this `index.md` in your Pages source.  
-> The Liquid filter `| relative_url` makes links work for both user and project sites.
+## 📊 Story Gallery
 
 ### 1) CO₂–Temperature Paths by Country (faceted)
-![CO₂–Temperature Paths (faceted)]({{ '/figs/M1b_co2_temp_connected_paths_faceted_free.png' | relative_url }})
-**What it shows:** Time-connected paths for each country; direction and shape reveal coupling between CO₂ per-capita and temperature. Free scales per panel clarify local dynamics.
+<img src="{{ IMG_DIR | append: '/M1b_co2_temp_connected_paths_faceted_free.png' | relative_url }}" alt="CO₂–Temperature Paths (faceted)" width="100%">
 
 ### 2) Sea Level Rise Over Time
-![Sea level rise over time]({{ '/figs/01_sea_level_trend.png' | relative_url }})
-**What it shows:** Within-country sea-level trajectories; compare slopes across facets.
+<img src="{{ IMG_DIR | append: '/01_sea_level_trend.png' | relative_url }}" alt="Sea level rise over time" width="100%">
 
 ### 3) Indexed Change Since Baseline (highlighted country)
-![Indexed change story]({{ '/figs/M2_index_story.png' | relative_url }})
-**What it shows:** Relative change (baseline = 100) across multiple metrics with peer IQR band and median. Swap `highlight_country` to change the focus.
+<img src="{{ IMG_DIR | append: '/M2_index_story.png' | relative_url }}" alt="Indexed change story" width="100%">
 
 ### 4) Temperature Distributions by Country (Ridgeline)
-![Temperature ridgeline]({{ '/figs/M3_temp_ridgeline.png' | relative_url }})
-**What it shows:** Distribution shape, spread, and medians (25/50/75%) across countries.
+<img src="{{ IMG_DIR | append: '/M3_temp_ridgeline.png' | relative_url }}" alt="Temperature ridgeline" width="100%">
 
 ### 5) Eco-Tradeoff Map (Rainfall vs Renewables)
-![Eco tradeoff map]({{ '/figs/M4_eco_tradeoff_map.png' | relative_url }})
-**What it shows:** Strategic quadrants. Bubble size = forest cover; color = extreme weather intensity; GAM smooth hints at trend.
+<img src="{{ IMG_DIR | append: '/M4_eco_tradeoff_map.png' | relative_url }}" alt="Eco tradeoff map" width="100%">
 
 ### 6) World Map — Renewable Momentum (Δ latest − baseline)
-![Renewables delta world]({{ '/figs/M5_world_renewables_delta.png' | relative_url }})
+<img src="{{ IMG_DIR | append: '/M5_world_renewables_delta.png' | relative_url }}" alt="Renewables delta world" width="100%">
 
 ### 7) Animated — Renewables by Year (GIF)
-![Renewables animation]({{ '/figs/world_renewables_yearly.gif' | relative_url }})
+<img src="{{ IMG_DIR | append: '/world_renewables_yearly.gif' | relative_url }}" alt="Renewables animation" width="100%">
 
 ### 8) Decoupling Vectors — Renewables vs Total CO₂
-![Decoupling vectors]({{ '/figs/M7_decoupling_vectors.png' | relative_url }})
-
-**Downloads for #8:**  
-[Decoupling summary (CSV)]({{ '/tables/decoupling_summary.csv' | relative_url }})
+<img src="{{ IMG_DIR | append: '/M7_decoupling_vectors.png' | relative_url }}" alt="Decoupling vectors" width="100%">
 
 ---
 
