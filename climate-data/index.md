@@ -1,269 +1,210 @@
-# Climate Mini‑Project (R Portfolio)
+---
+title: "Kiplagat | R Analytics Portfolio"
+description: "Data analytics, statistical modeling, and visualization in R"
+---
 
-_A compact, reproducible R portfolio page you can drop into your GitHub Pages as `index.md`._
+# 👋 Hi, I’m Kiplagat
+
+I build **data-driven solutions** that blend rigorous statistics, crisp visualizations, and clean, reproducible R code. This portfolio highlights selected work in **EDA**, **regression**, **ANOVA**, **report automation**, and **dashboard-quality plots**—with an emphasis on tidy, production-ready scripts.
 
 ---
 
-## 🎯 Project goals
-- Demonstrate mastery of R using a tidy, reproducible workflow.
-- Read a local Excel dataset, clean it, sanity‑check, explore, visualize, and model.
-- Save publication‑ready figures and include short, clear narrative.
-
-> **Local data path:** `C:\Users\akimutai\OneDrive - Kenya Development Corporation Limited\Desktop\climatedata.xlsx`
+## 🔧 Tech Stack
+- **R** (tidyverse, ggplot2, dplyr, tidyr, readr, readxl, purrr, forcats)
+- **Modeling**: broom, stats, car, AIC/BIC workflows
+- **Reporting**: knitr, rmarkdown, quarto, gt
+- **Data hygiene**: janitor, skimr
+- **Reproducibility**: renv, here
+- **Tooling**: Git/GitHub, GitHub Pages
 
 ---
 
-## 🔧 Setup
+## 📌 Featured Project — Climate Analytics (R)
+**Goal:** Build a compact analytical pipeline from raw Excel to insights: **descriptives, regression, ANOVA, and five plots**.
+
+**Dataset (example path):** `C:/Users/akimutai/Downloads/climatedata.xlsx`
+
+**Highlights:**
+- E2E script: load → clean → summarize → model → visualize
+- Multiple linear regression with diagnostic summaries
+- One-way ANOVA with Tukey post-hoc and eta-squared
+- 5 export-ready visualizations for reports/dashboards
+
+### Core Script
 ```r
-# Install once (uncomment to run)
-# install.packages(c("tidyverse", "readxl", "janitor", "lubridate", "scales", "broom"))
+# Packages (install once if needed)
+# install.packages(c("readxl","tidyverse","janitor","broom","skimr"))
+library(readxl); library(tidyverse); library(janitor); library(broom); library(skimr)
 
-library(tidyverse)
-library(readxl)
-library(janitor)
-library(lubridate)
-library(scales)
-library(broom)
-
-# Create an output folder for figures
-if (!dir.exists("figs")) dir.create("figs")
-```
-
----
-
-## 📥 Load data (Excel → R)
-```r
-# Adjust the path if different on your machine
-xlsx_path <- "C:/Users/akimutai/OneDrive - Kenya Development Corporation Limited/Desktop/climatedata.xlsx"
-
+xlsx_path <- "C:/Users/akimutai/Downloads/climatedata.xlsx"
 raw <- read_excel(xlsx_path)
-raw %>% glimpse()
-```
-
----
-
-## 🧽 Clean & standardize columns
-```r
-# Clean column names to snake_case and harmonize types
-climate <- raw %>%
-  clean_names() %>%
-  # The sheet uses special characters; rename explicitly for clarity
-  rename(
-    year                  = year,
-    country               = country,
-    avg_temperature_c     = avg_temperature_c,
-    co2_tons_capita       = co2_emissions_tons_capita,
-    sea_level_rise_mm     = sea_level_rise_mm,
-    rainfall_mm           = rainfall_mm,
-    population            = population,
-    renewable_energy_pct  = renewable_energy,
-    extreme_weather_events= extreme_weather_events,
-    forest_area_pct       = forest_area
-  ) %>%
+climate <- raw |>
+  clean_names() |>
   mutate(
     year = as.integer(year),
-    country = as.factor(country),
-    across(c(avg_temperature_c, co2_tons_capita, sea_level_rise_mm,
-             rainfall_mm, population, renewable_energy_pct,
-             extreme_weather_events, forest_area_pct), as.numeric)
+    country = as.factor(country)
   )
 
-# Quick sanity checks
-stopifnot(!any(is.na(climate$year)))
-stopifnot(all(climate$year >= 1900 & climate$year <= 2100))
+# Descriptives
+overall_desc <- climate |>
+  select(where(is.numeric)) |>
+  summarize(across(everything(), list(
+    n = ~sum(!is.na(.)), mean = ~mean(., na.rm=TRUE), sd = ~sd(., na.rm=TRUE),
+    min = ~min(., na.rm=TRUE), q25 = ~quantile(., 0.25, na.rm=TRUE),
+    median = ~median(., na.rm=TRUE), q75 = ~quantile(., 0.75, na.rm=TRUE),
+    max = ~max(., na.rm=TRUE)
+  ), .names = "{.col}_{.fn}"))
 
-summary(climate)
-```
-
-> **Note:** If any column shows unexpected `NA`s, confirm the Excel formatting (numeric vs text). You can coerce with `readxl::col_types` or `parse_number()`.
-
----
-
-## 🔎 Basic QA & tidy helpers
-```r
-# Duplicates check (same year + country)
-dups <- climate %>% count(country, year) %>% filter(n > 1)
-dups
-
-# Missingness by column
-na_rate <- climate %>% summarise(across(everything(), ~mean(is.na(.))))
-na_rate
-
-# A clean factor of countries
-countries <- fct_infreq(climate$country)
-levels(countries)
-```
-
----
-
-## 📊 Descriptive statistics
-```r
-# Core numeric summary
-num_summary <- climate %>%
-  summarise(
+by_country_desc <- climate |>
+  group_by(country) |>
+  summarize(
     n = n(),
-    years_min = min(year, na.rm = TRUE),
-    years_max = max(year, na.rm = TRUE),
-    temp_mean = mean(avg_temperature_c, na.rm = TRUE),
-    co2_mean  = mean(co2_tons_capita, na.rm = TRUE),
-    sea_mean  = mean(sea_level_rise_mm, na.rm = TRUE)
+    mean_temp = mean(avg_temperature_c, na.rm=TRUE),
+    sd_temp = sd(avg_temperature_c, na.rm=TRUE),
+    mean_co2 = mean(co2_emissions_tons_capita, na.rm=TRUE),
+    mean_rain = mean(rainfall_mm, na.rm=TRUE),
+    mean_sea = mean(sea_level_rise_mm, na.rm=TRUE),
+    mean_renew = mean(renewable_energy_percent, na.rm=TRUE),
+    mean_forest = mean(forest_area_percent, na.rm=TRUE),
+    .groups = "drop"
   )
-num_summary
 
-# Country‑level rollups
-by_country <- climate %>%
-  group_by(country) %>%
-  summarise(
-    n = n(),
-    temp_avg = mean(avg_temperature_c, na.rm = TRUE),
-    co2_avg  = mean(co2_tons_capita, na.rm = TRUE),
-    sea_avg  = mean(sea_level_rise_mm, na.rm = TRUE),
-    renew_avg= mean(renewable_energy_pct, na.rm = TRUE),
-    forest_avg = mean(forest_area_pct, na.rm = TRUE)
-  ) %>% arrange(desc(temp_avg))
-by_country
-```
+# Regression
+model <- lm(avg_temperature_c ~ co2_emissions_tons_capita + rainfall_mm +
+              renewable_energy_percent + sea_level_rise_mm + forest_area_percent +
+              year + country, data = climate)
+model_summary <- summary(model)
+model_tidy <- tidy(model, conf.int = TRUE)
+model_glance <- glance(model)
 
----
+# ANOVA
+anova_fit <- aov(avg_temperature_c ~ country, data = climate)
+eta_sq <- {
+  ss <- summary(anova_fit)[[1]][, "Sum Sq"]; ss[1] / sum(ss)
+}
 
-## 📈 Visuals (saved to `/figs`)
+# Visuals
+library(ggplot2); dir.create("figs", showWarnings = FALSE); theme_set(theme_minimal(base_size=12))
 
-### 1) CO₂ vs Temperature (with linear fit)
-```r
-p1 <- ggplot(climate, aes(co2_tons_capita, avg_temperature_c, color = country)) +
-  geom_point(alpha = 0.8) +
-  geom_smooth(method = "lm", se = TRUE, linewidth = 0.8, alpha = 0.2, color = "black") +
-  labs(
-    title = "CO₂ emissions vs Average Temperature",
-    x = "CO₂ (tons per capita)", y = "Average Temperature (°C)", color = "Country"
-  ) +
-  theme_minimal(base_size = 12)
-
-ggsave("figs/co2_vs_temp.png", p1, width = 7, height = 5, dpi = 120)
-```
-
-### 2) Sea‑level rise over time (faceted by country)
-```r
-p2 <- ggplot(climate, aes(year, sea_level_rise_mm, group = country)) +
-  geom_line(aes(color = country), linewidth = 0.9) +
-  geom_point(aes(color = country), size = 1.6) +
+p1 <- ggplot(climate, aes(year, sea_level_rise_mm, color = country, group = country)) +
+  geom_line(linewidth = 0.9) + geom_point(size = 1.6) +
   facet_wrap(~ country, scales = "free_y") +
-  labs(title = "Sea‑level rise (mm) over time", x = NULL, y = "Sea level rise (mm)") +
-  theme_minimal(base_size = 12) +
+  labs(title = "Sea Level Rise Over Time", x = NULL, y = "Sea level rise (mm)") +
   theme(legend.position = "none")
 
-ggsave("figs/sea_level_trend.png", p2, width = 9, height = 6, dpi = 120)
+ggsave("figs/01_sea_level_trend.png", p1, width = 10, height = 6, dpi = 150)
+
+p2 <- ggplot(climate, aes(co2_emissions_tons_capita, avg_temperature_c, color = country)) +
+  geom_point(size = 2) + geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "CO₂ vs Avg Temperature", x = "CO₂ (tons per capita)", y = "Avg Temp (°C)")
+
+ggsave("figs/02_co2_vs_temp.png", p2, width = 8, height = 6, dpi = 150)
+
+p3 <- ggplot(climate, aes(year, avg_temperature_c, color = country)) +
+  geom_point(alpha = 0.7) + geom_smooth(method = "loess", se = TRUE) +
+  labs(title = "Average Temperature Trend", x = NULL, y = "Avg Temp (°C)")
+
+ggsave("figs/03_temp_trend.png", p3, width = 8, height = 6, dpi = 150)
+
+p4 <- ggplot(climate, aes(rainfall_mm, renewable_energy_percent, color = country)) +
+  geom_point(size = 2) + geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Rainfall vs Renewable Energy", x = "Rainfall (mm)", y = "Renewable Energy (%)")
+
+ggsave("figs/04_rainfall_vs_renewables.png", p4, width = 8, height = 6, dpi = 150)
+
+p5 <- ggplot(climate, aes(x = factor(year), y = extreme_weather_events, fill = country)) +
+  geom_col(position = "dodge") +
+  labs(title = "Extreme Weather Events by Country and Year", x = "Year", y = "Events (count)")
+
+ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6, dpi = 150)
 ```
 
-### 3) Extreme weather events: top years
+### Selected Outputs
+- **Model quality:** `r model_glance$r.squared` R², `r model_glance$adj.r.squared` adj. R²
+- **ANOVA (country on temp):** eta² = `r round(eta_sq, 3)`
+- **Descriptives preview:** `overall_desc |> glimpse()`
+
+> For a full reproducible report, knit this into **HTML/PDF** with **rmarkdown** or **quarto**, embedding `figs/*.png` and tables.
+
+---
+
+## 📊 Plot Gallery (exported PNGs)
+Place these files under `/figs` in your repo and they will render here:
+
+![Sea level rise](figs/01_sea_level_trend.png)
+![CO₂ vs Temp](figs/02_co2_vs_temp.png)
+![Temp trend](figs/03_temp_trend.png)
+![Rainfall vs Renewables](figs/04_rainfall_vs_renewables.png)
+![Extreme Events](figs/05_extreme_events_by_country_year.png)
+
+---
+
+## 🧱 Reproducibility
+- Use **renv** to snapshot package versions:
 ```r
-top_extreme <- climate %>% slice_max(extreme_weather_events, n = 10)
-
-p3 <- ggplot(top_extreme, aes(reorder(paste(country, year, sep = "-"), extreme_weather_events),
-                              extreme_weather_events)) +
-  geom_col() +
-  coord_flip() +
-  labs(title = "Top 10 country‑years by extreme weather events",
-       x = "Country‑Year", y = "Events (count)") +
-  theme_minimal(base_size = 12)
-
-ggsave("figs/top_extreme.png", p3, width = 7, height = 5, dpi = 120)
+install.packages("renv"); renv::init(); renv::snapshot()
 ```
-
----
-
-## 📐 Simple models
-
-### Model A: Does higher CO₂ relate to higher temperatures?
+- Use **here** for project-anchored paths:
 ```r
-m_temp <- lm(avg_temperature_c ~ co2_tons_capita + country, data = climate)
-summary(m_temp)
+install.packages("here"); here::here("data","climatedata.xlsx")
+```
+- Keep raw data in `/data`, scripts in `/R`, outputs in `/figs`.
 
-tidy(m_temp) %>% arrange(p.value) %>% head(10)
+**Suggested repo structure**
+```
+.
+├─ index.md
+├─ _config.yml            # optional: theme: minima / minimal-mistakes / etc.
+├─ R/
+│  └─ climate_analysis.R
+├─ data/
+│  └─ climatedata.xlsx
+├─ figs/
+│  ├─ 01_sea_level_trend.png
+│  ├─ 02_co2_vs_temp.png
+│  ├─ 03_temp_trend.png
+│  ├─ 04_rainfall_vs_renewables.png
+│  └─ 05_extreme_events_by_country_year.png
+└─ renv.lock             # after snapshot
 ```
 
-### Model B: Do renewables associate with fewer extreme events?
+---
+
+## 🚀 How to Publish on GitHub Pages
+1. Create a repo named `username.github.io` (or enable Pages on any repo).
+2. Add this `index.md` to the repo root.
+3. *(Optional)* Add `_config.yml` with a theme:
+```yaml
+theme: minima
+``` 
+4. Commit & push → **Settings ▸ Pages** → Source: `main` (root) → Save.
+5. Visit `https://username.github.io/`.
+
+---
+
+## 🧪 Additional Demos
+### Quick EDA Helpers
 ```r
-m_events <- lm(extreme_weather_events ~ renewable_energy_pct + year + country, data = climate)
-summary(m_events)
-
-ggplot(augment(m_events), aes(.fitted, .resid)) +
-  geom_point(alpha = 0.6) +
-  geom_hline(yintercept = 0, linetype = 2) +
-  labs(title = "Residuals vs Fitted (Extreme Events Model)", x = "Fitted", y = "Residuals") +
-  theme_minimal()
-
-ggsave("figs/model_events_residuals.png", width = 7, height = 5, dpi = 120)
+library(skimr); skim(climate)
+library(janitor); tabyl(climate$country) |> adorn_pct_formatting(digits = 1)
 ```
 
-> **Caveat:** This is an illustrative, cross‑sectional panel of heterogeneous countries; causal claims aren’t appropriate. Treat results as descriptive.
-
----
-
-## 🧪 Reproducibility helpers
+### Correlation Peek (Numeric)
 ```r
-# Deterministic operations (if sampling later)
-set.seed(42)
-
-# Session info for reproducibility
-sessionInfo()
+num <- climate |> select(where(is.numeric))
+round(cor(num, use = "pairwise.complete.obs"), 2)
 ```
 
----
-
-## 🧵 Narrative (what each step shows)
-1. **Setup** loads the tidyverse and friends, then ensures a `figs/` directory exists for exported plots.
-2. **Load** reads the Excel file with `readxl`, preserving numeric types.
-3. **Clean** makes column names machine‑friendly and coerces types; we validate year ranges and summarize.
-4. **QA** checks duplicates (country‑year collisions) and missingness.
-5. **Descriptives** summarize central tendencies overall and by country.
-6. **Visuals** illustrate relationships: CO₂↔Temp, trends in sea‑level, and distribution of extreme events.
-7. **Models** run simple linear models to explore associations; we also inspect diagnostics.
-8. **Reproducibility** prints R session info.
-
----
-
-## 📂 Project structure (recommended)
-```
-climate-portfolio/
-├─ index.md            # this file (your GitHub Pages entry)
-├─ figs/               # auto‑saved plots
-└─ data/               # optional: copy the Excel here (and update path)
-```
-
----
-
-## 🌐 Publish on GitHub Pages
-1. Create a new public repo (e.g., `climate-portfolio`).
-2. Add this `index.md`, commit, and push.
-3. In **Settings → Pages**: Source = `main` (or `master`) / root.
-4. Wait a minute; your page will be live at `https://<your-username>.github.io/climate-portfolio/`.
-
-> If images don’t show, ensure you ran the code locally so `figs/*.png` exist and are committed.
-
----
-
-## ✅ Run checklist
-- [ ] `index.md` committed
-- [ ] `figs/` contains PNGs from the scripts
-- [ ] `sessionInfo()` appended if you want to show R version
-- [ ] Repo published via GitHub Pages
-
----
-
-## 📎 Appendix: Handy patterns
+### Model Diagnostics (base)
 ```r
-# Robust mean with explicit NA handling
-mean(climate$avg_temperature_c, na.rm = TRUE)
-
-# Count distinct working days per country (example of date logic if a date column existed)
-# climate %>% mutate(day = as.Date(some_timestamp)) %>% count(country, day) %>% count(country)
-
-# Save a single high‑res plot
-# ggsave("figs/my_plot.png", width = 8, height = 5, dpi = 200)
+par(mfrow = c(2,2)); plot(model); par(mfrow = c(1,1))
 ```
 
 ---
 
-*© 2025 — R tidy workflow demo.*
+## 🙋 About & Contact
+- **Role interests:** Data Analyst, Research Analyst, Analytics Engineer
+- **Focus areas:** Statistical modeling, public policy analytics, climate/health, automation
+- **Contact:** [Email](mailto:your.email@example.com) · [LinkedIn](https://www.linkedin.com/) · [GitHub](https://github.com/)
 
+> *This portfolio is continuously evolving. Feedback & collaboration are welcome.*
