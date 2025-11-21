@@ -1,7 +1,5 @@
 ---
 title: "Fraud & Transaction Analytics Report"
-author: "Alex Kimutai"
-date: "`r Sys.Date()`"
 ---
 
 # 1. Executive Summary
