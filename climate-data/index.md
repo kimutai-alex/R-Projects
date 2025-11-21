@@ -159,13 +159,6 @@ ggsave("figs/05_extreme_events_by_country_year.png", p5, width = 10, height = 6,
 
 ---
 
-#### If images still don’t display
-- Ensure `figs/` (and `tables/` for CSV) are **inside the same published source** as `index.md` (root or `/docs`).
-- File names must **exactly** match (case-sensitive).
-- Confirm files are **committed and pushed**, and Pages build is successful in **Settings → Pages**.
-
----
-
 ## 🙋 About & Contact
 - **Role interests:** Data Analyst, Research Analyst, Analytics Engineer
 - **Focus areas:** Statistical modeling, public policy analytics, climate/health, automation
