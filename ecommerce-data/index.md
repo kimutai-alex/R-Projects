@@ -2,11 +2,6 @@
 title: "Fraud & Transaction Analytics Report"
 author: "Alex Kimutai"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    toc: true
-    toc_depth: 3
-    number_sections: true
 ---
 
 # 1. Executive Summary
@@ -249,10 +244,5 @@ The youngest decile is nearly **10x riskier**. Strengthening onboarding and earl
 
 ### **5. Channel and geography require differentiated strategy.**  
 Web carries ~4x higher risk than app; certain countries consistently show higher fraud. **Geo-adaptive and channel-specific rules** are required.
-
----
-
-**End of Report**  
-```markdown
 
 ---
